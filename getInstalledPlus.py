@@ -7,11 +7,17 @@ from datetime import datetime
 def read_excluded_apps_from_csv(file_path):
     excluded_apps = []
 
-    with open(file_path, newline='') as csvfile:
-        reader = csv.reader(csvfile)  # Use csv.reader() instead of csv.DictReader()
-        next(reader)  # Skip the header
-        for row in reader:
-            excluded_apps.append(row[0])  # Append the app name from the row
+    if os.path.exists(file_path):
+        try:
+            with open(file_path, newline='') as csvfile:
+                reader = csv.reader(csvfile)
+                next(reader)  # Skip the header
+                for row in reader:
+                    excluded_apps.append(row[0])  # Append the app name from the row
+        except Exception as e:
+            print(f"Error reading excluded_apps.csv: {e}")
+    else:
+        print(f"excluded_apps.csv not found, skipping exclusion")
 
     return excluded_apps
 
@@ -25,29 +31,35 @@ def get_installed_apps(excluded_apps):
         if app.endswith('.app'):
             info_plist = os.path.join(applications_dir, app, 'Contents', 'Info.plist')
             if os.path.exists(info_plist):
-                with open(info_plist, 'rb') as f:
-                    plist = plistlib.load(f)
-                    app_name = plist.get('CFBundleName', app)
-                    
-                    # If the app is not in the excluded list, add it to the list of installed apps
-                    if app_name not in excluded_apps:
-                        app_version = plist.get('CFBundleShortVersionString', 'Unknown')
-                        app_bundle_id = plist.get('CFBundleIdentifier', 'Unknown')
-                        app_install_date = datetime.fromtimestamp(os.path.getmtime(info_plist)).strftime('%Y-%m-%d')
+                try:
+                    with open(info_plist, 'rb') as f:
+                        plist = plistlib.load(f)
+                        app_name = plist.get('CFBundleName', app)
                         
-                        apps.append({'name': app_name, 'version': app_version, 'bundle_id': app_bundle_id, 'install_date': app_install_date})
-    
+                        # If the app is not in the excluded list, add it to the list of installed apps
+                        if app_name not in excluded_apps:
+                            app_version = plist.get('CFBundleShortVersionString', 'Unknown')
+                            app_bundle_id = plist.get('CFBundleIdentifier', 'Unknown')
+                            app_install_date = datetime.fromtimestamp(os.path.getmtime(info_plist)).strftime('%Y-%m-%d')
+                            
+                            apps.append({'name': app_name, 'version': app_version, 'bundle_id': app_bundle_id, 'install_date': app_install_date})
+                except Exception as e:
+                    print(f"Error reading plist file: {e}")
+
     return apps
 
 # Save the list of installed apps to a CSV file
 def save_apps_to_csv(apps, file_path):
-    with open(file_path, 'w', newline='') as csvfile:
-        fieldnames = ['name', 'version', 'bundle_id', 'install_date']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    try:
+        with open(file_path, 'w', newline='') as csvfile:
+            fieldnames = ['name', 'version', 'bundle_id', 'install_date']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-        writer.writeheader()
-        for app in apps:
-            writer.writerow(app)
+            writer.writeheader()
+            for app in apps:
+                writer.writerow(app)
+    except Exception as e:
+        print(f"Error writing to installed_apps.csv: {e}")
 
 # Main script execution
 if __name__ == '__main__':
