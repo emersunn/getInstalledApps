@@ -1,12 +1,12 @@
-#macOS App Tracker
+# macOS App Tracker
 
 This script scans the /Applications directory on a macOS system and generates a CSV file with a list of installed applications, excluding any applications specified in a separate CSV file. The generated list includes the app name, version, bundle identifier, and installation date.
 
-##Requirements
+## Requirements
 
 Python 3.x
 
-##Usage
+## Usage
 
 1. Save the script as a file named app_tracker.py (or any other name you prefer).
 
@@ -26,7 +26,7 @@ python3 app_tracker.py
 
 5. The script will create a new CSV file called installed_apps.csv in the same directory. This file contains the list of installed applications, excluding the ones specified in the excluded_apps.csv file.
 
-##Customization
+## Customization
 
 To change the location of the excluded_apps.csv file or the output file, modify the file paths in the main script execution section:
 
