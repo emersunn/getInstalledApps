@@ -1,4 +1,4 @@
-# macOS App Tracker
+# macOS get installed apps
 
 This script scans the /Applications directory on a macOS system and generates a CSV file with a list of installed applications, excluding any applications specified in a separate CSV file. The generated list includes the app name, version, bundle identifier, and installation date.
 
