@@ -1,2 +1,2 @@
 # getInstalledPlus.py
-A script that outputs installed apps, excluding Apple apps and a defined list of apps.
+A script that outputs installed apps, excludes Apple apps and also a defined list of apps.
