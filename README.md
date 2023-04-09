@@ -1,6 +1,6 @@
 # macOS get installed apps
 
-This script scans the /Applications directory on a macOS system and generates a CSV file with a list of installed applications, excluding Apple applications and any applications specified in a separate CSV file. The generated list includes the app name, version, bundle identifier, and installation date.
+This script scans the /Applications directory on a macOS system and generates a CSV file with a list of installed applications, **excluding Apple applications** and any applications specified in a separate CSV file. If no CSV file is found, it will still run and you will get a list of all non-Apple apps. The generated list includes the app name, version, bundle identifier, and installation date.
 
 ## Requirements
 
