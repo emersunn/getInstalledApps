@@ -10,7 +10,7 @@ Python 3.x
 
 1. Save the script as a file named app_tracker.py (or any other name you prefer).
 
-2. Create a CSV file named excluded_apps.csv in the same directory as the script. This file should contain the names of the apps you want to exclude from the generated list. The first line should be a header with the name name, and each subsequent line should contain one app name. For example:
+2. Create a CSV file named excluded_apps.csv in the same directory as the script. This file should contain the names of the apps you want to exclude from the generated list. The first line should be a header with "name", and each subsequent line should contain one app name. For example:
 
 ```
 name
