@@ -14,8 +14,23 @@ Python 3.x
 
 ```
 name
-Safari
-TextEdit
+Code
+VLC media player
+Apparency
+DiffusionBee
+Topaz Gigapixel AI.app
+Retrobatch
+1Password
+BetterSnapTool
+Cardhop
+Topaz DeNoise AI.app
+Chrome
+Self Service
+Dropbox
+LaunchBar
+Topaz Sharpen AI.app
+Microsoft Remote Desktop
+OneDrive
 ```
 
 3. Open Terminal and navigate to the directory where you saved the script and the excluded_apps.csv file. You can use the cd command to change the directory. For example:
